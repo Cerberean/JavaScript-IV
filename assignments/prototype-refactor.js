@@ -27,28 +27,34 @@ Prototype Refactor
   * dimensions (These represent the character's size in the video game)
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
-function GameObject(obj){
+class GameObject{
+    constructor(obj){
     this.createdAt = obj.createdAt,
     this.name = obj.name,
     this.dimensions = obj.dimensions
-  };
-  GameObject.prototype.destroy = function(){
-    return `${this.name} was removed from the game.`
-  };
+  }
+  destroy(){
+    console.log(`${this.name} was removed from the game.`)
+  }
+}
   /*
     === CharacterStats ===
     * healthPoints
     * takeDamage() // prototype method -> returns the string '<object name> took damage.'
     * should inherit destroy() from GameObject's prototype
   */
-  function CharacterStats(obj){
-    GameObject.call(this, obj);
-    this.healthPoints = obj.healthPoints
-  };
-  CharacterStats.prototype = Object.create(GameObject.prototype);
-  CharacterStats.prototype.takeDamage = function(){
-    return `${this.name} took damage`
-  };
+  class CharacterStats extends GameObject{
+    constructor(childObj){
+        super(childObj);
+            this.healthPoints = childObj.healthPoints
+  }
+  create(){
+    
+  }
+  takeDamage(){
+    console.log(`${this.name} took damage`)
+  }
+}
   /*
     === Humanoid (Having an appearance or character resembling that of a human.) ===
     * team
@@ -58,16 +64,20 @@ function GameObject(obj){
     * should inherit destroy() from GameObject through CharacterStats
     * should inherit takeDamage() from CharacterStats
   */
-  function Humanoid(obj){
-    CharacterStats.call(this, obj);
-    this.team = obj.team,
-    this.weapons = obj.weapons,
-    this.language = obj.language
-  };
-  Humanoid.prototype = Object.create(CharacterStats.prototype);
-  Humanoid.prototype.greet = function(){
-    return `${this.name} offers a greeting in ${this.language}`
-  };
+  class Humanoid extends CharacterStats{
+    constructor(grandObj){
+        super(grandObj);
+            this.team = grandObj.team,
+            this.weapons = grandObj.weapons,
+            this.language = grandObj.language
+  }
+  create(){
+
+  }
+  greet(){
+    console.log(`${this.name} offers a greeting in ${this.language}`)
+  }
+}
   /*
     * Inheritance chain: GameObject -> CharacterStats -> Humanoid
     * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
@@ -134,9 +144,9 @@ function GameObject(obj){
     console.log(swordsman.team); // The Round Table
     console.log(mage.weapons); // Staff of Shamalama
     console.log(archer.language); // Elvish
-    console.log(archer.greet()); // Lilith offers a greeting in Elvish.
-    console.log(mage.takeDamage()); // Bruce took damage.
-    console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+    console.log(archer.greet); // Lilith offers a greeting in Elvish.
+    console.log(mage.takeDamage); // Bruce took damage.
+    console.log(swordsman.destroy); // Sir Mustachio was removed from the game.
   
     // Stretch task: 
     // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
