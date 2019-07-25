@@ -34,7 +34,7 @@ class GameObject{
     this.dimensions = obj.dimensions
   }
   destroy(){
-    console.log(`${this.name} was removed from the game.`)
+    return `${this.name} was removed from the game.`
   }
 }
   /*
@@ -48,11 +48,8 @@ class GameObject{
         super(childObj);
             this.healthPoints = childObj.healthPoints
   }
-  create(){
-    
-  }
   takeDamage(){
-    console.log(`${this.name} took damage`)
+    return `${this.name} took damage`
   }
 }
   /*
@@ -71,11 +68,8 @@ class GameObject{
             this.weapons = grandObj.weapons,
             this.language = grandObj.language
   }
-  create(){
-
-  }
   greet(){
-    console.log(`${this.name} offers a greeting in ${this.language}`)
+    return `${this.name} offers a greeting in ${this.language}`
   }
 }
   /*
@@ -144,9 +138,9 @@ class GameObject{
     console.log(swordsman.team); // The Round Table
     console.log(mage.weapons); // Staff of Shamalama
     console.log(archer.language); // Elvish
-    console.log(archer.greet); // Lilith offers a greeting in Elvish.
-    console.log(mage.takeDamage); // Bruce took damage.
-    console.log(swordsman.destroy); // Sir Mustachio was removed from the game.
+    console.log(archer.greet()); // Lilith offers a greeting in Elvish.
+    console.log(mage.takeDamage()); // Bruce took damage.
+    console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
   
     // Stretch task: 
     // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
